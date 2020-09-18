@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
+import { signInWithGoogle } from '../../firebase/firebase.utils';
+
 import './sign-in.styles.scss';
 
 function SignIn (props) {
@@ -14,7 +16,6 @@ function SignIn (props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
     setFormData({ email: '', password: '' })
   };
 
@@ -49,6 +50,7 @@ function SignIn (props) {
           required 
         />
         <CustomButton type="submit">Sign In</CustomButton>
+        <CustomButton onClick={signInWithGoogle}>Sign In With Google</CustomButton>
       </form>
     </div>
   )
