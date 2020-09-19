@@ -24,14 +24,13 @@ function App() {
             id: snapShot.id,
             ...snapShot.data()
           });
-        console.log(currentUser);
         });
       } 
         setCurrentUser(userAuth);
     })
 
     // return value equates to componentWillUnmount()
-    return unsubscribeFromAuth.current = null
+    return () => unsubscribeFromAuth.current = null
   }, []);
 
   return (
