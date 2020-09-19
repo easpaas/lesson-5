@@ -38,7 +38,7 @@ function SignIn (props) {
           type="email"
           value={formData.email} 
           handleChange={handleChange} 
-          label='email' 
+          label='Email' 
           required 
         />
         <FormInput 
@@ -46,7 +46,7 @@ function SignIn (props) {
           type="password"
           value={formData.password} 
           handleChange={handleChange} 
-          label='password' 
+          label='Password' 
           required 
         />
         <div className='buttons'>

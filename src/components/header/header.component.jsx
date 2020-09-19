@@ -1,6 +1,5 @@
 import React from 'react';
-
-import { Link } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 import { ReactComponent as Logo } from '../../assests/crown.svg';
 
@@ -21,15 +20,21 @@ const Header = ({ currentUser }) => (
         CONTACT
       </Link>
       {
-        currentUser ? (
-          <div className='option' onClick={() => auth.signOut()}>
-            SIGN OUT
+        console.log(currentUser)
+      }
+      {
+        currentUser ? 
+          <div 
+            className='option' 
+            onClick={() => auth.signOut()}
+          >
+            <Link to='/'>SIGN OUT</Link>
           </div>
-        ) : (
+        : 
           <Link className='option' to='/signin'>
             SIGN IN
           </Link>
-        )
+        
       }
     </div>
   </div>

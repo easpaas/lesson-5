@@ -24,15 +24,15 @@ function App() {
             id: snapShot.id,
             ...snapShot.data()
           });
+        console.log(currentUser);
         });
-      } else {
-        setCurrentUser({ currentUser: userAuth });
-      }
+      } 
+        setCurrentUser(userAuth);
     })
 
     // return value equates to componentWillUnmount()
-    return () => unsubscribeFromAuth.current = null;
-  }, [currentUser]);
+    return unsubscribeFromAuth.current = null
+  }, []);
 
   return (
     <div>
