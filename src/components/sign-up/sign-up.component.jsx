@@ -7,44 +7,43 @@ import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 import './sign-up.styles.scss';
 
+const initState = {
+  displayName: '', 
+  email: '', 
+  password: '', 
+  confirmPassword: ''
+}
+
 function SignUp() {
-  const [formData, setFormData] = useState({
-    displayName: '', 
-    email: '', 
-    password: '', 
-    confirmPassword: ''
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormData({ [name]: value });
-  };
+  const [formData, setFormData] = useState(initState);
 
   const handleSubmit = async e => {
     e.preventDefault();
+    const { displayName, email, password, confirmPassword } = formData;
 
-    if (formData.password !== formData.confirmPassword) {
+    if (password !== confirmPassword) {
       console.log("passwords don't match")
       return;
     }
 
     try {
-      const {user } = await auth.createUserWithEmailAndPassword(formData.email, formData.passowrd);
-
-      createUserProfileDocument(user, formData.displayName );
-
-      setFormData({
-        displayName: '', 
-        email: '', 
-        password: '', 
-        confirmPassword: ''
-      });
+      const {user} = await auth.createUserWithEmailAndPassword(email, password);
+      // firebase method that adds user to firebase db
+      createUserProfileDocument(user, { displayName } );
+      //reset form state 
+      setFormData(initState);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
+  const handleChange = (e) => {
+    e.persist();
+    const { name, value } = e.target;
+    setFormData({ ...formData,
+      [name]: value 
+    });
+  };
   return (
     <div className='sign-up'>
       <h2 className='title'>I do not have a account</h2>
@@ -54,31 +53,31 @@ function SignUp() {
           type='text'
           name='displayName'
           value={formData.displayName}
-          onChange={handleChange}
+          handleChange={handleChange}
           label='Display Name'
           required
         />
         <FormInput
-          type='text'
+          type='email'
           name='email'
           value={formData.email}
-          onChange={handleChange}
+          handleChange={handleChange}
           label='Email'
           required
         />
         <FormInput
-          type='text'
+          type='password'
           name='password'
           value={formData.password}
-          onChange={handleChange}
+          handleChange={handleChange}
           label='Password'
           required
         />
         <FormInput
-          type='text'
+          type='password'
           name='confirmPassword'
           value={formData.confirmPassword}
-          onChange={handleChange}
+          handleChange={handleChange}
           label='Confirm Password'
           required
         />
