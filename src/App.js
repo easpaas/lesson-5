@@ -26,7 +26,7 @@ function App() {
           });
         });
       } 
-        setCurrentUser(userAuth);
+      setCurrentUser(userAuth);
     })
 
     // return value equates to componentWillUnmount()

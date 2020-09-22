@@ -40,7 +40,8 @@ function SignUp() {
   const handleChange = (e) => {
     e.persist();
     const { name, value } = e.target;
-    setFormData({ ...formData,
+    setFormData({ 
+      ...formData,
       [name]: value 
     });
   };
