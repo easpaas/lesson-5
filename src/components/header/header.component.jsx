@@ -35,6 +35,7 @@ const Header = ({ currentUser }) => (
           </Link>
         
       }
+      <CartIcon /> 
     </div>
   </div>
 )
