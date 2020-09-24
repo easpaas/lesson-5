@@ -14,11 +14,12 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import { setCurrentUser } from './redux/user/user.actions';
 
 function App(props) {
+  // firebase related
   const unsubscribeFromAuth = useRef(null);
 
   useEffect(() => {
-    const {setCurrentUser} = props;
-
+    const { setCurrentUser } = props;
+    // firebase related
     unsubscribeFromAuth.current = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -35,7 +36,7 @@ function App(props) {
 
     // return value equates to componentWillUnmount()
     return () => unsubscribeFromAuth.current = null
-  }, []);
+  });
 
   return (
     <div>
@@ -50,14 +51,16 @@ function App(props) {
       </Switch>
     </div>
   );
-}
+};
 
-const mapStateToProps = ({user }) => ({ 
-  currentUser: user.currentUser,
-})
+// brings in state as props from redux store 
+const mapStateToProps = ({ user: { currentUser } }) => ({ 
+  currentUser,
+});
 
+// sends out a dispatch to set the current user 
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
