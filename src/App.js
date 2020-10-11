@@ -6,10 +6,14 @@ import './App.css';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component.jsx';
+
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import CheckoutPage from './pages/CheckoutPage/checkout.component';
+
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { setCurrentUser } from './redux/user/user.actions';
@@ -46,6 +50,7 @@ function App(props) {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={ShopPage} />
+        <Route exact path='/checkout' component={CheckoutPage} />
         <Route 
           path='/signin' 
           render={() => props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)}
