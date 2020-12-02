@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import './App.css';
