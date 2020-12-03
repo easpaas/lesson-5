@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import memoize from 'lodash.memoize';
+// import memoize from 'lodash.memoize';å
 
 const selectShop = state => state.shop;
 
