@@ -34,6 +34,10 @@ const CheckoutPage = ({ cartItems, total }) => {
     {
       cartItems.map(item => <CheckoutItem key={shortid.generate()} item={item} />)
     }
+    <div className="test">
+      *Please use the following test credit card for payments*
+      4242 4242 4242 4242 - Exp: 12/22 - CVV: 666
+    </div>
     <div className='total'>
       TOTAL: ${total}
       <StripeCheckoutButton price={total} />
