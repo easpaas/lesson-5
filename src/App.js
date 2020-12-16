@@ -14,17 +14,18 @@ import Header from './components/header/header.component.jsx';
 import SignInAndSignUpPage from './pages/signinsignup/sign-in-and-sign-up.component';
 import CheckoutPage from './pages/checkout/checkout.component';
 
-import { auth, createUserProfileDocument } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument, addCollectionAndDocuments } from './firebase/firebase.utils';
 
 import { setCurrentUser } from './redux/user/user.actions';
 import { selectCurrentUser } from './redux/user/user.selectors';
+import { selectCollectionsForPreview } from './redux/shop/shop.selectors';
 
 function App(props) {
   // firebase related
   const unsubscribeFromAuth = useRef(null);
 
   useEffect(() => {
-    const { setCurrentUser } = props;
+    const { setCurrentUser, collectionsArray } = props;
     // firebase related
     unsubscribeFromAuth.current = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
@@ -38,6 +39,7 @@ function App(props) {
         });
       } 
       setCurrentUser(userAuth);
+      addCollectionAndDocuments('collections', collectionsArray);
     })
 
     // return value equates to componentWillUnmount()
@@ -63,6 +65,7 @@ function App(props) {
 // brings in state as props from redux store 
 const mapStateToProps = createStructuredSelector({ 
   currentUser: selectCurrentUser,
+  collectionsArray: selectCollectionsForPreview
 });
 
 // sends out a dispatch to set the current user 
