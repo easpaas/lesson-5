@@ -39,7 +39,7 @@ function App(props) {
         });
       } 
       setCurrentUser(userAuth);
-      addCollectionAndDocuments('collections', collectionsArray);
+      addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({ title, items })));
     })
 
     // return value equates to componentWillUnmount()
