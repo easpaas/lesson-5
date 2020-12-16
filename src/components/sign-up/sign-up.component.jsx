@@ -16,6 +16,7 @@ const initState = {
 
 function SignUp() {
   const [formData, setFormData] = useState(initState);
+  const [error, setError] = useState('');
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -34,6 +35,7 @@ function SignUp() {
       setFormData(initState);
     } catch (error) {
       console.log(error.message);
+      setError(error.message);
     }
   };
 
@@ -69,6 +71,7 @@ function SignUp() {
         <FormInput
           type='password'
           name='password'
+          error={error}
           value={formData.password}
           handleChange={handleChange}
           label='Password'
