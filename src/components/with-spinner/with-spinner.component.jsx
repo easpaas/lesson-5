@@ -2,6 +2,7 @@ import React from 'react';
 
 import { SpinnerContainer, SpinnerOverlay } from './with-spinner.styles';
 
+// HOC 
 const WithSpinner = WrappedComponent => {
   const Spinner = ({ isLoading, ...otherProps }) => {
     return isLoading ? (
